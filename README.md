@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ONE by Propelius
+
+Marketing landing page for **ONE** — a connected ERP that brings projects, people, clients, finance, hiring, and engineering operations into a single platform for software companies.
+
+Built with Next.js 16 (App Router), React 19, TypeScript, and Tailwind CSS v4.
+
+## Tech Stack
+
+- **Framework:** [Next.js 16](https://nextjs.org) (App Router, Turbopack)
+- **UI:** React 19, TypeScript
+- **Styling:** Tailwind CSS v4
+- **Animation:** [GSAP](https://gsap.com) + `@gsap/react` (scroll-driven effects), CSS transitions/keyframes for everything else
+- **Icons:** lucide-react
+- **Device mockups:** react-mockframe (laptop frame in the Hero/Product sections)
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view it. The page auto-updates as you edit files under `src/`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | Description |
+|---|---|
+| `npm run dev` | Start the local dev server |
+| `npm run build` | Production build |
+| `npm run start` | Serve the production build |
+| `npm run lint` | Run ESLint |
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+  app/
+    layout.tsx        # Root layout, font loading
+    page.tsx           # Section order for the landing page
+    globals.css         # Theme tokens, section-specific CSS (masks, keyframes, custom scrollbars)
+  components/
+    layout/
+      Header.tsx        # Sticky nav, mobile full-screen menu
+      Footer.tsx         # Link columns + giant watermark
+    sections/
+      Hero.tsx            # Scroll-pinned hero with rotating ERP carousel
+      Partners.tsx         # Auto-scrolling client logo marquee
+      Workflow.tsx          # Dark "connected workflow" section
+      ProductDemo.tsx        # 14 ERP modules, tablet mockup preview  (#product)
+      Features.tsx             # 5 feature highlights, bento grid / mobile carousel  (#features)
+      Testimonials.tsx          # Staggered photo wall + CTA  (#customers)
+      FAQ.tsx                    # Accordion  (#faq)
+      Contact.tsx                 # Full-width dark CTA card with email capture  (#contact)
+    ui/
+      Button.tsx, Container.tsx, Logo.tsx, SectionHeading.tsx
+    visuals/
+      LaptopMockup.tsx, TabletMockup.tsx, ErpCarousel.tsx, WorkflowSignalGraph.tsx
+public/
+  images/
+    logos/              # ONE logo marks
+    erp/
+      hero/               # Rotating hero carousel screenshots
+      product-modules/     # ProductDemo module screenshots
+      features/             # Features section screenshots
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Notes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Section order in [`page.tsx`](src/app/page.tsx) determines the page: Hero → Partners → Workflow → ProductDemo → Features → Testimonials → FAQ → Contact, with Header/Footer outside `<main>`.
+- Section anchors (`#product`, `#workflow`, `#features`, `#customers`, `#faq`, `#contact`) are linked from the header nav and CTA buttons throughout the page.
+- `prefers-reduced-motion` is respected globally (see `globals.css`) and individually in components that run their own JS-driven animation loops (Hero carousel, Features carousel).
 
-## Deploy on Vercel
+## Deploy
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Deploy on [Vercel](https://vercel.com/new) or any Node host that supports Next.js. See the [Next.js deployment docs](https://nextjs.org/docs/app/building-your-application/deploying).
