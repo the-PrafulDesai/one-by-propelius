@@ -1,26 +1,302 @@
+@import "react-mockframe/styles/mockframe-laptops.css";
 @import "tailwindcss";
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #111118;
+  --primary: #635bff;
+  --primary-light: #8b7cff;
+  --secondary: #4f9cff;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: auto;
+  background: var(--background);
 }
 
 body {
-  background: var(--background);
+  margin: 0;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
+  font-family: var(--font-inter), Inter, Arial, sans-serif;
+  overflow-x: clip;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  color: #ffffff;
+  background: #635bff;
+}
+
+.one-gradient-text {
+  background-image: linear-gradient(90deg, #635bff 0%, #765eff 52%, #4f9cff 100%);
+  background-clip: text;
+  color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.one-hero-background {
+  background:
+    radial-gradient(
+      circle at 50% 76%,
+      rgba(99, 91, 255, 0.22),
+      transparent 29%
+    ),
+    radial-gradient(
+      circle at 68% 70%,
+      rgba(79, 156, 255, 0.13),
+      transparent 27%
+    ),
+    radial-gradient(
+      circle at 30% 75%,
+      rgba(139, 92, 246, 0.1),
+      transparent 25%
+    ),
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #fdfdff 42%,
+      #f6f5ff 70%,
+      #ecebff 100%
+    );
+}
+
+.laptop-mockup-stage {
+  position: relative;
+  width: 339px;
+  height: 196px;
+  flex: none;
+  pointer-events: none;
+}
+
+.laptop-mockup-stage > .mockframe {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) scale(0.295);
+  transform-origin: top center;
+  box-shadow: 0 58px 120px rgba(37, 31, 94, 0.24);
+}
+
+@media (min-width: 640px) {
+  .laptop-mockup-stage {
+    width: 551px;
+    height: 319px;
+  }
+
+  .laptop-mockup-stage > .mockframe {
+    transform: translateX(-50%) scale(0.48);
+  }
+}
+
+@media (min-width: 768px) {
+  .laptop-mockup-stage {
+    width: 689px;
+    height: 399px;
+  }
+
+  .laptop-mockup-stage > .mockframe {
+    transform: translateX(-50%) scale(0.6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .laptop-mockup-stage {
+    width: 895px;
+    height: 518px;
+  }
+
+  .laptop-mockup-stage > .mockframe {
+    transform: translateX(-50%) scale(0.78);
+  }
+}
+
+@media (min-width: 1280px) {
+  .laptop-mockup-stage {
+    width: 1056px;
+    height: 611px;
+  }
+
+  .laptop-mockup-stage > .mockframe {
+    transform: translateX(-50%) scale(0.92);
+  }
+}
+
+.hero-carousel {
+  position: relative;
+  --carousel-screen-width: 283px;
+  --carousel-screen-height: 177px;
+  --carousel-near-offset: 250px;
+  --carousel-far-offset: 500px;
+}
+
+@media (min-width: 640px) {
+  .hero-carousel {
+    --carousel-screen-width: 461px;
+    --carousel-screen-height: 288px;
+    --carousel-near-offset: 410px;
+    --carousel-far-offset: 820px;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-carousel {
+    --carousel-screen-width: 576px;
+    --carousel-screen-height: 360px;
+    --carousel-near-offset: 510px;
+    --carousel-far-offset: 1020px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-carousel {
+    --carousel-screen-width: 749px;
+    --carousel-screen-height: 468px;
+    --carousel-near-offset: 660px;
+    --carousel-far-offset: 1320px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-carousel {
+    --carousel-screen-width: 883px;
+    --carousel-screen-height: 552px;
+    --carousel-near-offset: 780px;
+    --carousel-far-offset: 1560px;
+  }
+}
+
+/*
+ * Positional properties (transform/opacity/z-index) are set inline from
+ * React state each card is a persistent element that slides between ring
+ * positions as the active slide rotates. This class only owns shape/shadow.
+ */
+.hero-carousel-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--carousel-screen-width);
+  height: var(--carousel-screen-height);
+  overflow: hidden;
+  border-radius: clamp(4px, 0.7vw, 10px);
+  background: #07080b;
+  /* box-shadow: 0 30px 70px -24px rgba(24, 18, 64, 0.38); */
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+/* Product modules: mobile horizontal tab scroller no visible scrollbar. */
+.product-module-tabs {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.product-module-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+/* Features: mobile/tablet carousel track no visible scrollbar, the dots
+   below it are the visible navigation affordance. */
+.features-carousel-track {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.features-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Product modules: desktop vertical feature list slim, subtle scrollbar. */
+.product-module-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #d5d3ec transparent;
+}
+
+.product-module-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.product-module-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.product-module-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #d5d3ec;
+  border-radius: 999px;
+}
+
+.product-module-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #b9b4ff;
+}
+
+/* Product modules: tablet preview fades/slides in on every module switch
+   (replays because the preview remounts via a `key` on the active module). */
+@keyframes module-preview-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.module-preview-enter {
+  animation: module-preview-enter 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.partners-marquee {
+  --marquee-duration: 30s;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
+
+.partners-marquee-track {
+  animation: partners-marquee-scroll var(--marquee-duration) linear infinite;
+}
+
+.partners-marquee:hover .partners-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes partners-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

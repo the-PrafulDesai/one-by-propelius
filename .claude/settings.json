@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx next *)",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri http://localhost:3000 -UseBasicParsing -TimeoutSec 5; $r.StatusCode } catch { $_.Exception.Message })",
+      "PowerShell(Get-Process -Id 24888 -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-Process node -ErrorAction SilentlyContinue)",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri http://localhost:3411 -UseBasicParsing -TimeoutSec 5; \"$\\($r.StatusCode\\) - $\\($r.Content.Length\\) bytes\" } catch { $_.Exception.Message })",
+      "PowerShell(foreach \\($p in 1396,5724,7936,10092,22840,31972\\) { try { Stop-Process -Id $p -Force -ErrorAction Stop; \"killed $p\" } catch { \"already gone: $p\" } })"
+    ]
+  }
+}
